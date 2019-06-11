@@ -1,0 +1,21 @@
+﻿@model Citolab.QTI.Package.Creator.Model.TextEntryItem
+<?xml version="1.0" encoding="utf-8"?>
+
+<assessmentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p2  http://www.imsglobal.org/xsd/qti/qtiv2p2/imsqti_v2p2.xsd" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p2" identifier="@Model.UniqueId" title="@Model.Title" adaptive="false" timeDependent="false">
+    <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="string">
+        <correctResponse>
+            <value>@Model.Key</value>
+        </correctResponse>
+        <mapping defaultValue="0">
+            <mapEntry mapKey="@Model.Key" mappedValue="1"/>
+        </mapping>
+    </responseDeclaration>
+    <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="float"/>
+    <itemBody>
+        @Raw(Model.Body)
+        <p>
+            <textEntryInteraction responseIdentifier="RESPONSE" expectedLength="15"/>
+        </p>
+    </itemBody>
+    <responseProcessing template="http://www.imsglobal.org/question/qti_v2p1/rptemplates/map_response"/>
+</assessmentItem>

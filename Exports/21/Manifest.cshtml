@@ -1,0 +1,54 @@
+﻿@using System
+@model Citolab.QTI.Package.Creator.Model.ManifestItems
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:imsqti="http://www.imsglobal.org/xsd/imsqti_metadata_v2p1" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p2.xsd http://www.imsglobal.org/xsd/imsmd_v1p2 http://www.imsglobal.org/xsd/imsmd_v1p2p4.xsd http://www.imsglobal.org/xsd/imsqti_metadata_v2p1 http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_metadata_v2p1.xsd" identifier="MANIFEST-@Guid.NewGuid()" xmlns="http://www.imsglobal.org/xsd/imscp_v1p1">
+    <metadata>
+        <schema>IMS Content</schema>
+        <schemaversion>2.1</schemaversion>
+    </metadata>
+    <organizations/>
+    <resources>
+        @if (Model.Media != null)
+        {
+            foreach (var media in Model.Media)
+            {
+                <resource identifier="@System.IO.Path.GetFileName(media)" type="associatedcontent/xmlv1p0/learning-application-resource" href="@media">
+                    <metadata/>
+                    <file href="@media"/>
+                </resource>
+            }
+        }
+        @if (Model.Css != null)
+        {
+            foreach (var css in Model.Css)
+            {
+                <resource identifier="@System.IO.Path.GetFileName(css)" type="webcontent" href="@css">
+                    <metadata/>
+                    <file href="@css"/>
+                </resource>
+            }
+        }
+        @foreach (var item in Model.Items)
+        {
+            <resource identifier="ITM-@item.UniqueId" type="imsqti_item_xmlv2p1" href="items/ITM-@(item.UniqueId).xml">
+                <metadata/>
+                <file href="items/ITM-@(item.UniqueId).xml"/>
+                @if (Model.Dependencies != null && Model.Dependencies.ContainsKey(item.UniqueId.ToString()))
+                {
+                    foreach (var dependency in Model.Dependencies[item.UniqueId.ToString()])
+                    {
+                        <dependency identifierref="@dependency"/>
+                    }
+                }
+            </resource>
+        }
+        <resource identifier="@(Model.TestId)" type="imsqti_test_xmlv2p1" href="items/@(Model.TestId).xml">
+            <file href="items/@(Model.TestId).xml"/>
+            @foreach (var item in Model.Items)
+            {
+                <dependency identifierref="ITM-@(item.UniqueId)"/>
+            }
+        </resource>
+    </resources>
+</manifest>

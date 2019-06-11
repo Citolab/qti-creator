@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+ 
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <RootNamespace>Citolab.QTI.Package.Creator</RootNamespace>
+    <AssemblyName>Citolab.QTI.Package.Creator</AssemblyName>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <Compile Remove="Demo\**" />
+    <EmbeddedResource Remove="Demo\**" />
+    <None Remove="Demo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Exports\21\ChoiceInteraction.cshtml" />
+    <None Remove="Exports\21\Manifest.cshtml" />
+    <None Remove="Exports\21\Test.cshtml" />
+    <None Remove="Exports\21\TextEntryInteraction.cshtml" />
+    <None Remove="Exports\22\ChoiceInteraction.cshtml" />
+    <None Remove="Exports\22\Manifest.cshtml" />
+    <None Remove="Exports\22\Test.cshtml" />
+    <None Remove="Exports\22\TextEntryInteraction.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Exports\21\ChoiceInteraction.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\21\Manifest.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\21\Test.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\21\TextEntryInteraction.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\22\ChoiceInteraction.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\22\Manifest.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\22\Test.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exports\22\TextEntryInteraction.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
+  </ItemGroup>
+
+</Project>

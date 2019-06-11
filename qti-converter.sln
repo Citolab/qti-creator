@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "ConsoleApp1\SampleApp.csproj", "{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Citolab.QTI.Package.Creator", "qti-package-creator\Citolab.QTI.Package.Creator.csproj", "{4B4E416A-8283-4D8D-B304-60663B9026A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{34D17D02-37B4-49B2-A681-C1BBEEC232F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4E416A-8283-4D8D-B304-60663B9026A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4E416A-8283-4D8D-B304-60663B9026A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4E416A-8283-4D8D-B304-60663B9026A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4E416A-8283-4D8D-B304-60663B9026A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D48FCCA6-BD65-40B9-8820-6E9B52F13A8F} = {34D17D02-37B4-49B2-A681-C1BBEEC232F6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DC4A5D8-162C-4B6E-BDB4-B9C5DF3F3A99}
+	EndGlobalSection
+EndGlobal
