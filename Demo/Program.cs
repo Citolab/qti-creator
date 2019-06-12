@@ -24,7 +24,6 @@ namespace SampleApp
             var services = new ServiceCollection();
             services.AddQtiCreator();
             var serviceProvider = services.BuildServiceProvider();
-            // eeturn provider.GetRequiredService<RazorViewToStringRenderer>();
             var qtiPackageCreator = serviceProvider.GetRequiredService<QtiPackageCreator>();
             var packageLocation = await qtiPackageCreator.CreatePackageWithPlainTextItems(
                 QTIVersion.v2_2,
@@ -42,9 +41,40 @@ namespace SampleApp
                             })
 
                 }, temp.FullName);
-
-            Console.WriteLine(packageLocation);
             // create richText items
+            var imageIndex = 0;
+            var packageLocationRichText = await qtiPackageCreator.CreatePackageWithRichTextItems(
+                QTIVersion.v2_2,
+                "richtext_assessment",
+                new List<IItem>
+                {
+                    new TextEntryItem("001", "richtext1", "<div>\r\n    <p>Taken from wikpedia</p>\r\n    <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA\r\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO\r\n    9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />\r\n</div> ", "2"),
+                     new MultipleChoiceItem("002", " richtext2", "1 + 10",
+                        new List<Alternative>
+                        {
+                            new Alternative {IsKey = true,Text = "<div>\r\n    <p style=\"color:red;\">Taken from wikpedia</p>\r\n    <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA\r\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO\r\n    9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />\r\n</div> "},
+                            new Alternative {IsKey = false,Text = "<div>\r\n    <p style=\"color:blue;\">Taken from wikpedia</p>\r\n    <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA\r\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO\r\n    9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />\r\n</div> "},
+                            new Alternative {IsKey = false,Text = "<div>\r\n    <p style=\"color:green;\">Taken from wikpedia</p>\r\n    <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA\r\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO\r\n    9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />\r\n</div> "}
+                        })
+
+                }, temp.FullName,
+                (imageSource) =>
+                {
+                    var base64 = imageSource.Substring(imageSource.IndexOf("base64,",
+                        StringComparison.Ordinal)).Trim();
+                    var bytes = Convert.FromBase64String(base64);
+                    imageIndex++;
+                    return new RetrievedFile
+                    {
+                        Name = $"image_{imageIndex}.png",
+                        Bytes = bytes
+                    };
+                });
+
+            Console.WriteLine($"Create package with plain text item on location: {packageLocation}");
+            Console.WriteLine($"Create package with rich text item on location: {packageLocationRichText}");
+
+
         }
     }
 }

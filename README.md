@@ -1,4 +1,4 @@
-# Citolab qti-creator for ASP.NET Core
+# Citolab qti-creator for .NET
  
 This library helps to create a qti-package with simple item-types. It's build to do conversions.
 
