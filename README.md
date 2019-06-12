@@ -1,4 +1,4 @@
-# Citolab qti-creator for .NET
+# Citolab.QTI.Package.Creator for .NET
  
 This library helps to create a qti-package with simple item-types and scoring. 
 It uses Razor templates to create a qti-package. 
