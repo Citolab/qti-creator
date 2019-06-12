@@ -6,7 +6,7 @@
     <Authors>Citolab</Authors>
     <Company>Cito</Company>
     <Copyright>Cito</Copyright>
-    <Description>Library to persist data in Mongo or in-memory database</Description>
+    <Description>Package to create QTI packages. Usefull for conversions.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Citolab/qti-creator/</PackageProjectUrl>
