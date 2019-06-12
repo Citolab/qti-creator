@@ -49,5 +49,3 @@ will be QTI compatible. But if there is a inline styles: `div style='color: red;
 
 Creates a package with items with rich text. The content of item.body and alternatives will be converted
 to qti compatible html. You should provide a handler to process images. The input will the src of the image and the return value should be of IRetrievedFile. This because images can be in a database, file location or base64.
-
-
