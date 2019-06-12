@@ -4,6 +4,9 @@ This library helps to create a qti-package with simple item-types and scoring.
 It uses Razor templates to create a qti-package. 
 It's build to do conversions and never created to be production tool. 
 
+Packages can be installed using NuGet:
+- Install-Package Citolab.QTI.Package.Creator
+
 ## Usage
 
 With ASP.NET Core:
