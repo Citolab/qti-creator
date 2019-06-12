@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Citolab.QTI.Package.Creator;
 using Citolab.QTI.Package.Creator.Helpers;
@@ -41,8 +42,8 @@ namespace SampleApp
                             })
 
                 }, temp.FullName);
+            Thread.Sleep(1000); //make sure the file name is different
             // create richText items
-            var imageIndex = 0;
             var packageLocationRichText = await qtiPackageCreator.CreatePackageWithRichTextItems(
                 QTIVersion.v2_2,
                 "richtext_assessment",
@@ -57,21 +58,28 @@ namespace SampleApp
                             new Alternative {IsKey = false,Text = "<div>\r\n    <p style=\"color:green;\">Taken from wikpedia</p>\r\n    <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA\r\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO\r\n    9TXL0Y4OHwAAAABJRU5ErkJggg==\" alt=\"Red dot\" />\r\n</div> "}
                         })
 
-                }, temp.FullName,
-                (imageSource) =>
+                }, temp.FullName,null); // base64 images will be processed without a handler
+            foreach (var fileInfo in temp.GetFiles("!(*.zip)"))
+            {
+                try
                 {
-                    var base64 = imageSource.Substring(imageSource.IndexOf("base64,",
-                        StringComparison.Ordinal)).Trim();
-                    var bytes = Convert.FromBase64String(base64);
-                    imageIndex++;
-                    return new RetrievedFile
-                    {
-                        Name = $"image_{imageIndex}.png",
-                        Bytes = bytes
-                    };
-                });
+                    fileInfo.Delete();
+                } catch { // do nothing
+                         }
+            }
 
-            Console.WriteLine($"Create package with plain text item on location: {packageLocation}");
+                foreach (var dir in temp.GetDirectories())
+                {
+                    try
+                    {
+                        dir.Delete(true);
+                    }
+                    catch
+                    {
+                        // do nothing 
+                    }
+                }
+                    Console.WriteLine($"Create package with plain text item on location: {packageLocation}");
             Console.WriteLine($"Create package with rich text item on location: {packageLocationRichText}");
 
 

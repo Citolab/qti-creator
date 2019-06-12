@@ -31,8 +31,11 @@ namespace Citolab.QTI.Package.Creator.Model
             return GetRenderedItem(item);
         }
 
-        public Task<string> CreatePlainTextAsync(ITextEntryItem item) =>
-            GetRenderedItem(item);
+        public Task<string> CreatePlainTextAsync(ITextEntryItem item)
+        {
+            item.Body = item.Body.WrapTextInParagraph();
+            return GetRenderedItem(item);
+        }
 
         private Task<string> GetRenderedItem(ITextEntryItem item)
         {

@@ -3,7 +3,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <assessmentTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                toolName="Q-Construction" toolVersion="0.1" title="@Model.Title" identifier="@Model.Id" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1  http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_v2p1.xsd" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1">
+                toolName="Citolab-QtiCreator" toolVersion="0.1" title="@Model.Title" identifier="@Model.Id" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1  http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_v2p1.xsd" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1">
     <outcomeDeclaration cardinality="single" identifier="SCORE" baseType="integer">
         <defaultValue>
             <value>0</value>
@@ -13,7 +13,7 @@
         <assessmentSection title="Section1" visible="true" keepTogether="false" identifier="RES-@Guid.NewGuid()">
             @foreach (var item in @Model.Items)
             {
-                <assessmentItemRef href="ITM-@(item.UniqueId).xml" identifier="ITM-@item.UniqueId.ToString()">
+                <assessmentItemRef href="@(item.UniqueId).xml" identifier="@item.UniqueId.ToString()">
                     <weight identifier="WEIGHT" value="1"/>
                 </assessmentItemRef>
             }
@@ -24,7 +24,7 @@
             <sum>
                 @foreach (var item in Model.Items)
                 {
-                    <variable identifier="ITM-@(item.UniqueId).SCORE" weightIdentifier="WEIGHT"/>
+                    <variable identifier="@(item.UniqueId).SCORE" weightIdentifier="WEIGHT"/>
                 }
             </sum>
         </setOutcomeValue>

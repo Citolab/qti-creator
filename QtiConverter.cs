@@ -110,7 +110,7 @@ namespace Citolab.QTI.Package.Creator
                             await _textEntryInteractionCreator.CreatePlainTextAsync(textEntryItem); ;
                         break;
                 }
-                var fileName = Path.Combine(itemsDir.ToString(), $"ITM-{item.UniqueId}.xml");
+                var fileName = Path.Combine(itemsDir.ToString(), $"{item.UniqueId}.xml");
                 File.WriteAllText(fileName, itemQti);
             }
             var test = new QtiTest { Id = $"TST-{Guid.NewGuid()}", Items = itemsList, Title = _testname };

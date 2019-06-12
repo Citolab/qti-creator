@@ -59,8 +59,8 @@ namespace Citolab.QTI.Package.Creator.Helpers
                     if (base64Splitted.Length <= 1) continue;
                     var filename = imageNode.Attributes?["alt"]?.Value;
                     name = !string.IsNullOrEmpty(filename)
-                        ? $"IMG_{itemcode.ReplaceIllegalFilenameChars()}-{Path.GetFileNameWithoutExtension(filename).ReplaceIllegalFilenameChars()}.{GetExtension(base64Splitted[0])}"
-                        : $"IMG_{itemcode.ReplaceIllegalFilenameChars()}-{images.Count + 1}.{GetExtension(base64Splitted[0])}";
+                        ? $"IMG_{itemcode.Replace("ITM-", "").ReplaceIllegalFilenameChars()}-{Path.GetFileNameWithoutExtension(filename).ReplaceIllegalFilenameChars()}.{GetExtension(base64Splitted[0])}"
+                        : $"IMG_{itemcode.Replace("ITM-", "").ReplaceIllegalFilenameChars()}-{images.Count + 1}.{GetExtension(base64Splitted[0])}";
                     image = Convert.FromBase64String(base64Splitted[1]);
                 }
                 else if (imageNode.Attributes?["src"] != null)
@@ -101,7 +101,17 @@ namespace Citolab.QTI.Package.Creator.Helpers
         public static string ReplaceIllegalFilenameChars(this string input) =>
             Path.GetInvalidFileNameChars().Aggregate(input, (current, c) => current.Replace(c, '_'));
 
-        public static string StripHtml(this string input) =>
+
+
+        public static string WrapTextInParagraph(this string input)
+        {
+            if (!input.Trim().StartsWith("<"))
+            {
+                input = $"<p>{input}</p>"; // wrap in paragraph if it's just text
+            }
+            return input;
+        }
+    public static string StripHtml(this string input) =>
             string.IsNullOrEmpty(input) ? string.Empty : StripHtmlRegex.Replace(input, string.Empty).Trim();
 
     }

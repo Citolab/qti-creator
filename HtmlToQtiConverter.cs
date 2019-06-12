@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using Citolab.QTI.Package.Creator.Helpers;
@@ -50,24 +49,19 @@ namespace Citolab.QTI.Package.Creator
         /// <summary>
         ///     The content of the css file. Needed because qti doesnt support inline styles.
         /// </summary>
-        public string Css
-        {
-            get
-            {
-                var sb = new StringBuilder();
-                return sb.ToString();
-            }
-        }
+        public string Css => _styles.ToString();
 
         /// <summary>
         ///     Depencies of items to images or css.
         /// </summary>
         public Dictionary<string, HashSet<string>> Dependencies => _dependencies;
 
+        private StringBuilder _styles = new StringBuilder("");
 
         public string ConvertXhtmlToQti(string itemId, string html)
         {
             _itemId = itemId;
+            html.WrapTextInParagraph();
             //Remove namespaces, and word crap
             html = ExecuteRegex(html);
             html = FixMissingParagraph(html);
@@ -530,6 +524,7 @@ namespace Citolab.QTI.Package.Creator
                 {
                     _stylesAdded.Add(style, className);
                 }
+                AddStyleToCss(className, style);
                 if (htmlNode.Attributes["class"] == null) htmlNode.Attributes.Append(doc.CreateAttribute("class"));
                 htmlNode.Attributes["class"].Value =
                     string.Concat(htmlNode.Attributes["class"].Value, " ", className).Trim();
@@ -607,7 +602,7 @@ namespace Citolab.QTI.Package.Creator
             var newImages = doc.GetImages(itemcode, _resourceHandler)?.ToList();
             newImages?.ForEach(i =>
             {
-                var name = $"IMG-{i.Key}";
+                var name = $"{i.Key}";
                 AddAsDependency(name);
                 if (_images.ContainsKey(name)) return;
                 var dir = new DirectoryInfo(Path.Combine(_tempPath, "img"));
@@ -620,6 +615,7 @@ namespace Citolab.QTI.Package.Creator
 
         private void AddAsDependency(string name)
         {
+            name = name.Replace(".", "_");
             if (!_dependencies.ContainsKey(_itemId))
                 _dependencies.Add(_itemId, new HashSet<string>());
             var list = _dependencies[_itemId];
@@ -703,14 +699,14 @@ namespace Citolab.QTI.Package.Creator
         ///// <history>
         /////     [marcelh] 12-7-2012 Created
         ///// </history>
-        //private static void AddStyleToCss(StringBuilder cssStringBuilder, string className, string styles)
-        //{
-        //    const string formatCss = ".{0}{1}{{{1}{2}{1}}}";
-        //    //add return after ;
-        //    styles = styles.Replace(";", $";{Environment.NewLine}");
-        //    styles = string.Format(formatCss, className, Environment.NewLine, styles);
-        //    cssStringBuilder.AppendLine(styles);
-        //}
+        private void AddStyleToCss(string className, string styles)
+        {
+            const string formatCss = ".{0}{1}{{{1}{2}{1}}}";
+            //add return after ;
+            styles = styles.Replace(";", $";{Environment.NewLine}");
+            styles = string.Format(formatCss, className, Environment.NewLine, styles);
+            _styles.AppendLine(styles);
+        }
 
         /// <summary>
         ///     Shoulds the convert to inline CSS. Some interaction tags can have e.g. width and height that should be converted to

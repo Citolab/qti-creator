@@ -6,7 +6,7 @@
                 xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:m="http://www.w3.org/1998/Math/MathML"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                toolVersion="0.1" toolName="Q-Construction" title="@Model.Title" identifier="@Model.Id"
+                toolVersion="0.1" toolName="Citolab-QtiCreator" title="@Model.Title" identifier="@Model.Id"
                 xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p2 http://www.imsglobal.org/xsd/qti/qtiv2p2/imsqti_v2p2p1.xsd">
     <outcomeDeclaration cardinality="single" identifier="SCORE" baseType="integer">
         <defaultValue>
@@ -17,7 +17,7 @@
         <assessmentSection title="Section1" visible="true" keepTogether="false" identifier="RES-@Guid.NewGuid()">
             @foreach (var item in Model.Items)
             {
-                <assessmentItemRef href="ITM-@(item.UniqueId).xml" identifier="ITM-@item.UniqueId">
+                <assessmentItemRef href="@(item.UniqueId).xml" identifier="@item.UniqueId">
                     <weight identifier="WEIGHT" value="1"/>
                 </assessmentItemRef>
             }
@@ -28,7 +28,7 @@
             <sum>
                 @foreach (var item in Model.Items)
                 {
-                    <variable identifier="ITM-@(item.UniqueId).SCORE" weightIdentifier="WEIGHT"/>
+                    <variable identifier="@(item.UniqueId).SCORE" weightIdentifier="WEIGHT"/>
                 }
             </sum>
         </setOutcomeValue>

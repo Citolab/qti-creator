@@ -1,13 +1,12 @@
 ﻿@using System
 @model Citolab.QTI.Package.Creator.Model.MultipleChoiceItem
 <?xml version="1.0" encoding="utf-8"?>
-
-<assessmentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p2p1  http://www.imsglobal.org/xsd/qti/qtiv2p2/imsqti_v2p2p1.xsd" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p2" identifier="@Model.UniqueId" title="@Model.Title" adaptive="false" timeDependent="false">
+<assessmentItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p2  http://www.imsglobal.org/xsd/qti/qtiv2p2/imsqti_v2p2.xsd" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p2" identifier="@Model.UniqueId" title="@Model.Title" adaptive="false" timeDependent="false">
     <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="identifier">
         <correctResponse>
             @foreach (var key in Model.Keys)
             {
-                <value>@key</value>
+            <value>@key</value>
             }
         </correctResponse>
     </responseDeclaration>
@@ -22,10 +21,10 @@
             <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="@(Model.Keys.Count > 1 ? Model.Alternatives.Count - 1 : 1)">
                 @for (var i = 0; i <= Model.Alternatives.Count - 1; i++)
                 {
-                    <simpleChoice identifier="@Convert.ToChar(65 + i)">@Raw(Model.Alternatives[i].Text)</simpleChoice>
+                <simpleChoice identifier="@Convert.ToChar(65 + i)">@Raw(Model.Alternatives[i].Text)</simpleChoice>
                 }
             </choiceInteraction>
         </div>
     </itemBody>
-    <responseProcessing template="http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct"/>
+    <responseProcessing template="http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct" />
 </assessmentItem>

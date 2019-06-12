@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Citolab.QTI.package.Creator.Interfaces;
+using Citolab.QTI.Package.Creator.Helpers;
 using Citolab.QTI.Package.Creator.Interfaces;
 using Citolab.QTI.Package.Creator.Model;
 using RazorLight;
@@ -33,8 +34,16 @@ namespace Citolab.QTI.Package.Creator.Creators
             return GetRenderedItem(item);
         }
 
-        public Task<string> CreatePlainTextAsync(IMultipleChoiceItem item) =>
-            GetRenderedItem(item);
+        public Task<string> CreatePlainTextAsync(IMultipleChoiceItem item)
+        {
+            item.Body = item.Body.WrapTextInParagraph();
+            foreach (var itemAlternative in item.Alternatives)
+            {
+                itemAlternative.Text = itemAlternative.Text.WrapTextInParagraph();
+            }
+            return GetRenderedItem(item);
+        }
+
 
         private Task<string> GetRenderedItem(IMultipleChoiceItem item)
         {

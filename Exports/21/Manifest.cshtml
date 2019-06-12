@@ -13,7 +13,7 @@
         {
             foreach (var media in Model.Media)
             {
-                <resource identifier="@System.IO.Path.GetFileName(media)" type="associatedcontent/xmlv1p0/learning-application-resource" href="@media">
+                <resource identifier="@System.IO.Path.GetFileName(media)?.Replace(".", "_").Replace(" ", "_")" type="associatedcontent/xmlv1p0/learning-application-resource" href="@media">
                     <metadata/>
                     <file href="@media"/>
                 </resource>
@@ -23,7 +23,7 @@
         {
             foreach (var css in Model.Css)
             {
-                <resource identifier="@System.IO.Path.GetFileName(css)" type="webcontent" href="@css">
+                <resource identifier="@System.IO.Path.GetFileName(css)?.Replace(".", "_").Replace(" ", "_")" type="webcontent" href="@css">
                     <metadata/>
                     <file href="@css"/>
                 </resource>
@@ -31,14 +31,14 @@
         }
         @foreach (var item in Model.Items)
         {
-            <resource identifier="ITM-@item.UniqueId" type="imsqti_item_xmlv2p1" href="items/ITM-@(item.UniqueId).xml">
+            <resource identifier="@item.UniqueId" type="imsqti_item_xmlv2p1" href="items/@(item.UniqueId).xml">
                 <metadata/>
-                <file href="items/ITM-@(item.UniqueId).xml"/>
+                <file href="items/@(item.UniqueId).xml"/>
                 @if (Model.Dependencies != null && Model.Dependencies.ContainsKey(item.UniqueId.ToString()))
                 {
                     foreach (var dependency in Model.Dependencies[item.UniqueId.ToString()])
                     {
-                        <dependency identifierref="@dependency"/>
+                        <dependency identifierref="@dependency.Replace(".", "_").Replace(" ", "_")"/>
                     }
                 }
             </resource>
@@ -47,7 +47,7 @@
             <file href="items/@(Model.TestId).xml"/>
             @foreach (var item in Model.Items)
             {
-                <dependency identifierref="ITM-@(item.UniqueId)"/>
+                <dependency identifierref="@(item.UniqueId)"/>
             }
         </resource>
     </resources>

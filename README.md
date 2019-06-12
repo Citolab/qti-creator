@@ -50,6 +50,9 @@ Creates a package with items with plain text or QTI compatible html. A simple di
 ### CreatePackageWithRichTextItems 
 
 Creates a package with items with rich text. The content of item.body and alternatives will be converted
-to qti compatible html. You need to provide a handler to process images. The input will the src of the image tag and the return value should be of IRetrievedFile. This because images can be in a database, file location or base64.
+to qti compatible html. You need to provide a handler to process images. 
+The input will the src of the image tag and the return value should be of IRetrievedFile. 
+This because images can be in a database or file location. If all images are base64 then
+you can pass, null since these are processed automatically.
 
 ### See /Demo for a sample.
