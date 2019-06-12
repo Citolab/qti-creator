@@ -45,12 +45,11 @@ There are two methods:
 
 ### CreatePackageWithPlainTextItems 
 
-Creates a package with items with plain text or QTI compatible html. A simple `<div>alternative A</div>`
-will be QTI compatible. But if there is a inline styles: `div style='color: red;'`  or images then you should use the richtext method.
+Creates a package with items with plain text or QTI compatible html. A simple div tag: `<div>alternative A</div>` will be QTI compatible. But if there is a inline style like: `div style='color: red;'`  or the html contains images then you should use the rich text method.
 
 ### CreatePackageWithRichTextItems 
 
 Creates a package with items with rich text. The content of item.body and alternatives will be converted
-to qti compatible html. You should provide a handler to process images. The input will the src of the image and the return value should be of IRetrievedFile. This because images can be in a database, file location or base64.
+to qti compatible html. You need to provide a handler to process images. The input will the src of the image tag and the return value should be of IRetrievedFile. This because images can be in a database, file location or base64.
 
 ### See /Demo for a sample.
