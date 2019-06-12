@@ -3,10 +3,25 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
+    <Authors>Citolab</Authors>
+    <Company>Cito</Company>
+    <Copyright>Cito</Copyright>
+    <Description>Library to persist data in Mongo or in-memory database</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Citolab/qti-creator/</PackageProjectUrl>
+    <PackageIconUrl>https://avatars1.githubusercontent.com/u/32355044?s=400&amp;u=8d300a1c77a82b06814b096d175f68a33bd6f73b&amp;v=4</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Citolab/qti-creator/</RepositoryUrl>
     <RootNamespace>Citolab.QTI.Package.Creator</RootNamespace>
     <AssemblyName>Citolab.QTI.Package.Creator</AssemblyName>
   </PropertyGroup>
  
+  <ItemGroup>
+    <Compile Remove="nupkg\**" />
+    <EmbeddedResource Remove="nupkg\**" />
+    <None Remove="nupkg\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="Demo\**" />
     <EmbeddedResource Remove="Demo\**" />
@@ -14,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="LICENSE" Pack="true" PackagePath=""/>
     <None Remove="Exports\21\ChoiceInteraction.cshtml" />
     <None Remove="Exports\21\Manifest.cshtml" />
     <None Remove="Exports\21\Test.cshtml" />
